@@ -1,0 +1,97 @@
+{
+  "name": "neurofi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI-Powered Cryptocurrency Trading Platform",
+  "author": "NeuroFi Team",
+  "license": "MIT",
+  "homepage": "https://neurofi.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neurofi/neurofi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neurofi/neurofi/issues"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "trading",
+    "ai",
+    "machine-learning",
+    "react",
+    "vite",
+    "tailwindcss"
+  ],
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext js,jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"No tests specified\" && exit 0",
+    "test:watch": "echo \"No tests specified\" && exit 0",
+    "test:coverage": "echo \"No tests specified\" && exit 0",
+    "analyze": "npm run build && npx vite-bundle-analyzer dist/stats.html",
+    "clean": "rm -rf dist node_modules/.vite",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "check-updates": "npx npm-check-updates",
+    "update-deps": "npx npm-check-updates -u && npm install",
+    "prepare": "husky install || true",
+    "pre-commit": "npm run lint:fix && npm run format",
+    "validate": "npm run lint && npm run format:check && npm run type-check",
+    "start": "npm run dev",
+    "serve": "npm run preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
+    "lightweight-charts": "^4.2.3",
+    "lucide-react": "^0.545.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^6.28.0",
+    "ws": "^8.14.2",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.36.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.1.0",
+    "tailwindcss": "3.4",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.3.3",
+    "vite": "^7.1.7",
+    "vite-bundle-analyzer": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
