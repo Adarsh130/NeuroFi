@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: neurofi-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: neurofi
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - neurofi-network
+
+  # Redis Cache
+  redis:
+    image: redis:7.2-alpine
+    container_name: neurofi-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - neurofi-network
+
+  # Node.js API Server
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: neurofi-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/neurofi?authSource=admin
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: neurofi-super-secret-jwt-key-change-this-in-production-2024
+      ML_SERVICE_URL: http://ml-service:8000
+      FRONTEND_URL: http://localhost:5173
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - neurofi-network
+
+  # Python ML Service
+  ml-service:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    container_name: neurofi-ml-service
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: development
+      HOST: 0.0.0.0
+      PORT: 8000
+      REDIS_URL: redis://redis:6379
+      MONGODB_URL: mongodb://admin:password123@mongodb:27017/neurofi_ml?authSource=admin
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - mongodb
+    networks:
+      - neurofi-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  neurofi-network:
+    driver: bridge
