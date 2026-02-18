@@ -1,7 +1,3 @@
-"""
-NeuroFi ML Service API
-Provides sentiment analysis and price prediction services
-"""
 
 import os
 import sys

@@ -1,8 +1,3 @@
-"""
-Price Prediction Service
-Uses machine learning models to predict cryptocurrency prices
-"""
-
 import asyncio
 import logging
 from datetime import datetime, timedelta

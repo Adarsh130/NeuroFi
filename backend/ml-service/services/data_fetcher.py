@@ -1,7 +1,3 @@
-"""
-Data Fetcher Service
-Fetches cryptocurrency data from various sources
-"""
 
 import asyncio
 import logging

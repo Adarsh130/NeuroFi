@@ -1,8 +1,3 @@
-"""
-Technical Analysis Service
-Provides technical analysis indicators and signals
-"""
-
 import asyncio
 import logging
 from datetime import datetime, timedelta

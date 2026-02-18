@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authService.login(email, password);
       setUser(response.user);
       console.log('✅ Login successful');
-      return response;
+      return response.user;
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message || 'Login failed';
       setError(errorMessage);
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authService.signup(userData);
       setUser(response.user);
       console.log('✅ Signup successful');
-      return response;
+      return response.user;
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message || 'Signup failed';
       setError(errorMessage);
